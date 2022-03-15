@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>Pharmacies</title>
+    <title>produits</title>
 </head>
 
 <body>
@@ -29,12 +29,13 @@
             </div>
         </nav>
         <div class="card " style="text-align: center;">
-            <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les pharmacies</h3>
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les produits</h3>
         </div>
         <div class="d-flex justify-content-between">
+        {{ $produits->links()}}
             <p align="center">
                 <a class="btn btn-primary " type="button" href="">
-                    Ajouter une pharmacie
+                    Ajouter un produit
                 </a>
             </p>
 
@@ -48,21 +49,15 @@
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th class="text-center"> Identifiant de la pharmacie</th>
-                            <th class="text-center"> Ville de la pharmacie</th>
-                            <th class="text-center"> Adresse de la pharmacie</th>
-                            <th class="text-center"> Numero de la pharmacie</th>
-                            <th class="text-center"> Mail de la pharmacie</th>
+                            <th class="text-center"> Libellé du produit</th>
+                            <th class="text-center"> Prix unitaire du produit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pharmacies as $pharmacie)
+                        @foreach($produits as $produit)
                         <tr>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMACode}} </td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAVille}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAAdresse}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMANumeroTelephone}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAMail}}</td> 
+                            <td class="pt-3-half"> {{$produit->PRODLibelle}} </td>
+                            <td class="pt-3-half"> {{$produit->PRODPrixUnitaire}} </td>
                             <td><a class="btn btn-primary" type="button" href="">
                                     Modifier
 
