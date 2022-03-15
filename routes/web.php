@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pharmacie', [PharmacieController::class, "index"]);
+Route::get('/pharmacie', [PharmacieController::class, 'show'])->name("goPharmacie");
