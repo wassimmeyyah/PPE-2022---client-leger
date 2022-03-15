@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <title>Pharmacies</title>
+    <title>Employes</title>
 </head>
 
 <body>
@@ -29,12 +29,13 @@
             </div>
         </nav>
         <div class="card " style="text-align: center;">
-            <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les pharmacies</h3>
+            <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les employes</h3>
         </div>
         <div class="d-flex justify-content-between">
+        {{ $employes->links()}}
             <p align="center">
                 <a class="btn btn-primary " type="button" href="">
-                    Ajouter une pharmacie
+                    Ajouter un employé
                 </a>
             </p>
 
@@ -48,21 +49,25 @@
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th class="text-center"> Identifiant de la pharmacie</th>
-                            <th class="text-center"> Ville de la pharmacie</th>
-                            <th class="text-center"> Adresse de la pharmacie</th>
-                            <th class="text-center"> Numero de la pharmacie</th>
-                            <th class="text-center"> Mail de la pharmacie</th>
+                            <th class="text-center"> Code de l'employé</th>
+                            <th class="text-center"> Nom de l'employé</th>
+                            <th class="text-center"> Prénom de l'employé</th>
+                            <th class="text-center"> Poste de l'employé</th>
+                            <th class="text-center"> Mail de l'employé</th>
+                            <th class="text-center"> Téléphone de l'employé</th>
+                            <th class="text-center"> Pharmacie de l'employé</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pharmacies as $pharmacie)
+                        @foreach($employes as $employe)
                         <tr>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMACode}} </td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAVille}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAAdresse}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMANumeroTelephone}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAMail}}</td> 
+                            <td class="pt-3-half"> {{$employe->EMPLOYCode}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYNom}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYPrenom}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYPoste}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYMail}} </td> 
+                            <td class="pt-3-half"> {{$employe->EMPLOYTelephone}} </td> 
+                            <td class="pt-3-half"> {{$employe->EMPLOYPharmacie}} </td> 
                             <td><a class="btn btn-primary" type="button" href="">
                                     Modifier
 
