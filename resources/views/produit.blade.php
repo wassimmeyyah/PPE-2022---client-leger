@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-between">
         {{ $produits->links()}}
             <p align="center">
-                <a class="btn btn-primary " type="button" href="">
+                <a class="btn btn-primary " type="button" href="{{route('produit.create')}}">
                     Ajouter un produit
                 </a>
             </p>

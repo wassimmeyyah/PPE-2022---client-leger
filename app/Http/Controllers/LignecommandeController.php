@@ -16,4 +16,17 @@ class LignecommandeController extends Controller
         $lignecommandes = Lignecommande::all();
         return view('lignecommandeCreate', compact('lignecommandes'));
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            "COMRef"=>"required",
+            "PRODRef"=>"required",
+            "Quantité"=>"required"
+        ]);
+
+        Lignecommande::create($request->all());
+
+        return back()->with("success", "Détail de la commande ajouté avec succès !");
+    }
 }

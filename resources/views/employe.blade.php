@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-between">
         {{ $employes->links()}}
             <p align="center">
-                <a class="btn btn-primary " type="button" href="">
+                <a class="btn btn-primary " type="button" href="{{route('employe.create')}}">
                     Ajouter un employé
                 </a>
             </p>

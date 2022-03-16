@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-between">
         {{ $lignecommandes->links()}}
             <p align="center">
-                <a class="btn btn-primary " type="button" href="">
+                <a class="btn btn-primary " type="button" href="{{route('lignecommande.create')}}">
                     Détailler une commande
                 </a>
             </p>

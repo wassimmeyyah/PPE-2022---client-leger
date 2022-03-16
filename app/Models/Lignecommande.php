@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lignecommande extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
+    
+    protected $fillable = ["COMRef", "PRODRef", "Quantité" ];    
 }

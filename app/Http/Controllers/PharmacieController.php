@@ -18,4 +18,19 @@ class PharmacieController extends Controller
         $pharmacies = Pharmacies::all();
         return view('pharmacieCreate', compact('pharmacies'));
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            "PHARMACode"=>"required",
+            "PHARMAVille"=>"required",
+            "PHARMAAdresse"=>"required",
+            "PHARMANumeroTelephone"=>"required",
+            "PHARMAMail"=>"required"
+        ]);
+
+        Pharmacies::create($request->all());
+
+        return back()->with("success", "Pharmacie ajoutée avec succès !");
+    }
 }

@@ -44,7 +44,7 @@
         <div class="d-flex justify-content-between">
             {{ $commandes->links()}}
             <p align="center">
-                <a class="btn btn-primary " type="button" href="">
+                <a class="btn btn-primary " type="button" href="{{route('commande.create')}}">
                     Ajouter une commande
                 </a>
             </p>

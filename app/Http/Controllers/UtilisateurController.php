@@ -16,4 +16,18 @@ class UtilisateurController extends Controller
         $utilisateurs = Utilisateur::all();
         return view('utilisateurCreate', compact('utilisateurs'));
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            "UTILCode"=>"required",
+            "UtilIdentifiant",
+            "UTILPassword"=>"required",
+            "UTILPharmacieSecteur"=>"required"
+        ]);
+
+        Utilisateur::create($request->all());
+
+        return back()->with("success", "Utilisateur ajouté avec succès !");
+    }
 }

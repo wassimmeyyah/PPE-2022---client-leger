@@ -16,4 +16,17 @@ class ProduitController extends Controller
         $produits = Produit::all();
         return view('produitCreate', compact('produits'));
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            "PRODRef"=>"required",
+            "PRODLibelle"=>"required",
+            "PRODPrixUnitaire"=>"required"
+        ]);
+
+        Produit::create($request->all());
+
+        return back()->with("success", "Produit ajouté avec succès !");
+    }
 }

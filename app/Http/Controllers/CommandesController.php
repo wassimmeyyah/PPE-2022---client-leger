@@ -16,4 +16,17 @@ class CommandesController extends Controller
         $commandes = Commandes::all();
         return view('commandeCreate', compact('commandes'));
     }
+
+    public function store(Request $request) {
+        
+        $request->validate([
+            "COMRef"=>"required",
+            "COMDate"=>"required",
+            "UTILCode"=>"required"
+        ]);
+
+        Commandes::create($request->all());
+
+        return back()->with("success", "Commande ajoutée avec succès !");
+    }
 }

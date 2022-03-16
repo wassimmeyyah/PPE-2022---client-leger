@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Utilisateur extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+    
+    protected $fillable = ["UTILCode", "UTILIdentifiant", "UTILPassword", "UTILPharmacieSecteur" ];
 }
