@@ -11,4 +11,9 @@ class ProduitController extends Controller
         $produits = Produit::paginate(10);
         return view("produit", compact('produits'));
     }
+
+    public function create() {
+        $produits = Produit::all();
+        return view('produitCreate', compact('produits'));
+    }
 }

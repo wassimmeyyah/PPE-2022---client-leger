@@ -11,4 +11,9 @@ class LignecommandeController extends Controller
         $lignecommandes = Lignecommande::paginate(40);
         return view("lignecommande", compact('lignecommandes'));
     }
+
+    public function create() {
+        $lignecommandes = Lignecommande::all();
+        return view('lignecommandeCreate', compact('lignecommandes'));
+    }
 }

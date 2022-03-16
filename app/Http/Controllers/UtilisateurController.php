@@ -11,4 +11,9 @@ class UtilisateurController extends Controller
         $utilisateurs = Utilisateur::paginate(40);
         return view("utilisateur", compact('utilisateurs'));
     }
+
+    public function create() {
+        $utilisateurs = Utilisateur::all();
+        return view('utilisateurCreate', compact('utilisateurs'));
+    }
 }

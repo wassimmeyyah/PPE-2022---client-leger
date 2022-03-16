@@ -17,14 +17,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse p-3 mb-2 bg-danger " id="navbarTogglerDemo01">
-                <a class="navbar-brand text-uppercase text-white " href="">Accueil</a>
+                <a class="navbar-brand text-uppercase text-white " href="{{route('accueil')}}">Accueil</a>
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link  text-white " href="#">Les pharmacies </a>
+                        <a class="nav-link  text-white " href="{{route('pharmacie')}}">Les pharmacies </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  text-white " href="">Les commerciaux</a>
+                        <a class="nav-link  text-white " href="{{route('employe')}}">Les employés</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white " href="{{route('produit')}}">Les produits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white " href="{{route('utilisateur')}}">Les utilisateurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  text-white " href="{{route('commande')}}">Les commandes</a>
+                    </li>
+                                        
                 </ul>
             </div>
         </nav>

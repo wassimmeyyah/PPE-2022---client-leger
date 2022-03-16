@@ -21,16 +21,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('accueil');
 
-Route::get('/pharmacie', [PharmacieController::class, "index"]);
+Route::get('/pharmacie', [PharmacieController::class, "index"])->name("pharmacie");
+Route::get('/employe', [EmployeController::class, "index"])->name("employe");
+Route::get('/utilisateur', [UtilisateurController::class, "index"])->name("utilisateur");
+Route::get('/produit', [ProduitController::class, "index"])->name("produit");
+Route::get('/commande', [CommandesController::class, "index"])->name("commande");
+Route::get('/lignecommande', [LignecommandeController::class, "index"])->name("lignecommande");
 
-Route::get('/employe', [EmployeController::class, "index"]);
-
-Route::get('/utilisateur', [UtilisateurController::class, "index"]);
-
-Route::get('/produit', [ProduitController::class, "index"]);
-
-Route::get('/commande', [CommandesController::class, "index"]);
-
-Route::get('/lignecommande', [LignecommandeController::class, "index"]);
+Route::get('/pharmacie/create', [PharmacieController::class, "create"])->name("pharmacie.create");
+Route::get('/employe/create', [EmployeController::class, "create"])->name("employe.create");
+Route::get('/utilisateur/create', [UtilisateurController::class, "create"])->name("utilisateur.create");
+Route::get('/produit/create', [ProduitController::class, "create"])->name("produit.create");
+Route::get('/commande/create', [CommandesController::class, "create"])->name("commande.create");
+Route::get('/lignecommande/create', [LignecommandeController::class, "create"])->name("lignecommande.create");

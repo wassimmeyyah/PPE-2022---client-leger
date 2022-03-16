@@ -11,4 +11,9 @@ class CommandesController extends Controller
         $commandes = Commandes::paginate(10);
         return view("commande", compact('commandes'));
     }
+
+    public function create() {
+        $commandes = Commandes::all();
+        return view('commandeCreate', compact('commandes'));
+    }
 }
