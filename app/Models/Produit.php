@@ -9,7 +9,14 @@ class Produit extends Model
 {
     use HasFactory;
 
+    protected $table = 'produits';
+    protected $primaryKey = 'PRODRef';
+
+    protected $keyType = 'int';
+    public $incrementing = 'true';
+    protected $connection = 'mysql';
+
     public $timestamps = false;
     
-    protected $fillable = ["PRODRef", "PRODLibelle", "PRODDPrixUnitaire" ];
+    protected $fillable = ["PRODRef", "PRODLibelle", "PRODPrixUnitaire" ];
 }

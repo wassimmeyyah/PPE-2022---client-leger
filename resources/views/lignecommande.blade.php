@@ -34,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white " href="{{route('commande')}}">Les commandes</a>
                     </li>
-                                        
+
                 </ul>
             </div>
         </nav>
@@ -42,20 +42,20 @@
             <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Détail des commandes</h3>
         </div>
         <div class="d-flex justify-content-between">
-        {{ $lignecommandes->links()}}
-            <p align="center">
-                <a class="btn btn-primary " type="button" href="{{route('lignecommande.create')}}">
-                    Détailler une commande
-                </a>
-            </p>
-
+            {{ $lignecommandes->links()}}
         </div>
 
 
 
         <div class="card-body">
+
             <div id="table" class="table-editable bg-light">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                @if(session()->has('successDelete'))
+                <div class="alert alert-success">
+                    <h3>{{session()->get('successDelete')}}</h3>
+                </div>
+                @endif
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
@@ -70,20 +70,7 @@
                             <td class="pt-3-half"> {{$lignecommande->COMRef}} </td>
                             <td class="pt-3-half"> {{$lignecommande->PRODRef}} </td>
                             <td class="pt-3-half"> {{$lignecommande->Quantité}} </td>
-                            <td><a class="btn btn-primary" type="button" href="">
-                                    Modifier
 
-                                </a></td>
-                            <td>
-                                <a href="#" class="btn btn-danger" type="button">
-                                    Supprimer
-
-                                </a>
-                                <form method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                </form>
-
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>

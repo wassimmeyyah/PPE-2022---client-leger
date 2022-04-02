@@ -34,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white " href="{{route('lignecommande')}}">Détail des commandes</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -55,6 +55,11 @@
         <div class="card-body">
             <div id="table" class="table-editable bg-light">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                @if(session()->has('successDelete'))
+                <div class="alert alert-success">
+                    <h3>{{session()->get('successDelete')}}</h3>
+                </div>
+                @endif
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
@@ -68,21 +73,21 @@
                     <tbody>
                         @foreach($pharmacies as $pharmacie)
                         <tr>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMACode}} </td>
+                            <td class="pt-3-half"> {{$pharmacie->getKey()}} </td>
                             <td class="pt-3-half"> {{$pharmacie->PHARMAVille}}</td>
                             <td class="pt-3-half"> {{$pharmacie->PHARMAAdresse}}</td>
                             <td class="pt-3-half"> {{$pharmacie->PHARMANumeroTelephone}}</td>
-                            <td class="pt-3-half"> {{$pharmacie->PHARMAMail}}</td> 
-                            <td><a class="btn btn-primary" type="button" href="">
-                                    Modifier
-
-                                </a></td>
+                            <td class="pt-3-half"> {{$pharmacie->PHARMAMail}}</td>
                             <td>
-                                <a href="#" class="btn btn-danger" type="button">
+                                <a href="{{route('pharmacie.edit', ['pharmacie'=>$pharmacie->PHARMACode])}}" class="btn btn-primary" ">Modifier</a>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-danger" type="button" onclick="if(confirm('Voulez-vous vraiment supprimer cette pharmacie ?')){document.getElementById('{{$pharmacie->PHARMACode}}'). submit()}">
                                     Supprimer
 
                                 </a>
-                                <form method="post">
+                                <form id="{{$pharmacie->PHARMACode}}" action="{{route('pharmacie.supprimer',['pharmacie'=>$pharmacie->PHARMACode])}}" method="post">
+                                    @csrf
                                     <input type="hidden" name="_method" value="delete">
                                 </form>
 

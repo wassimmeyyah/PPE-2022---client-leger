@@ -48,3 +48,25 @@ Route::post('/utilisateur/create', [UtilisateurController::class, "store"])->nam
 Route::post('/produit/create', [ProduitController::class, "store"])->name("produit.ajouter");
 Route::post('/commande/create', [CommandesController::class, "store"])->name("commande.ajouter");
 Route::post('/lignecommande/create', [LignecommandeController::class, "store"])->name("lignecommande.ajouter");
+
+// SUPPRESSION 
+Route::delete('/pharmacie/{pharmacie}', [PharmacieController::class, "delete"])->name("pharmacie.supprimer");
+Route::delete('/employe/{employe}', [EmployeController::class, "delete"])->name("employe.supprimer");
+Route::delete('/utilisateur/{utilisateur}', [UtilisateurController::class, "delete"])->name("utilisateur.supprimer");
+Route::delete('/produit/{produit}', [ProduitController::class, "delete"])->name("produit.supprimer");
+Route::delete('/commande/{commande}', [CommandesController::class, "delete"])->name("commande.supprimer");
+Route::delete('/lignecommande/{lignecommande}', [LigneCommandeController::class, "delete"])->name("lignecommande.supprimer");
+
+// UPDATE
+Route::put('/pharmacie/{pharmacie}', [PharmacieController::class, "update"])->name("pharmacie.update"); 
+Route::put('/employe/{employe}', [EmployeController::class, "update"])->name("employe.update"); 
+Route::put('/utilisateur/{utilisateur}', [UtilisateurController::class, "update"])->name("utilisateur.update"); 
+Route::put('/produit/{produit}', [ProduitController::class, "update"])->name("produit.update"); 
+Route::put('/commande/{commande}', [CommandesController::class, "update"])->name("commande.update"); 
+
+// EDIT
+Route::get('/pharmacie/{pharmacie}', [PharmacieController::class, "edit"])->name("pharmacie.edit");
+Route::get('/employe/{employe}', [EmployeController::class, "edit"])->name("employe.edit"); 
+Route::get('/utilisateur/{utilisateur}', [UtilisateurController::class, "edit"])->name("utilisateur.edit"); 
+Route::get('/produit/{produit}', [ProduitController::class, "edit"])->name("produit.edit"); 
+Route::get('/commande/{commande}', [CommandesController::class, "edit"])->name("commande.edit");

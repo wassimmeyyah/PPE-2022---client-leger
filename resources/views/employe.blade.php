@@ -34,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white " href="{{route('lignecommande')}}">Détail des commandes</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -42,7 +42,7 @@
             <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les employes</h3>
         </div>
         <div class="d-flex justify-content-between">
-        {{ $employes->links()}}
+            {{ $employes->links()}}
             <p align="center">
                 <a class="btn btn-primary " type="button" href="{{route('employe.create')}}">
                     Ajouter un employé
@@ -56,6 +56,11 @@
         <div class="card-body">
             <div id="table" class="table-editable bg-light">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                @if(session()->has('successDelete'))
+                <div class="alert alert-success">
+                    <h3>{{session()->get('successDelete')}}</h3>
+                </div>
+                @endif
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
@@ -71,26 +76,27 @@
                     <tbody>
                         @foreach($employes as $employe)
                         <tr>
-                            <td class="pt-3-half"> {{$employe->EMPLOYCode}} </td>
+                            <td class="pt-3-half"> {{$employe->getKey()}} </td>
                             <td class="pt-3-half"> {{$employe->EMPLOYNom}} </td>
                             <td class="pt-3-half"> {{$employe->EMPLOYPrenom}} </td>
                             <td class="pt-3-half"> {{$employe->EMPLOYPoste}} </td>
-                            <td class="pt-3-half"> {{$employe->EMPLOYMail}} </td> 
-                            <td class="pt-3-half"> {{$employe->EMPLOYTelephone}} </td> 
-                            <td class="pt-3-half"> {{$employe->EMPLOYPharmacie}} </td> 
-                            <td><a class="btn btn-primary" type="button" href="">
+                            <td class="pt-3-half"> {{$employe->EMPLOYMail}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYTelephone}} </td>
+                            <td class="pt-3-half"> {{$employe->EMPLOYPharmacie}} </td>
+                            <td><a class="btn btn-primary" type="button" href="{{route('employe.edit', ['employe'=>$employe->EMPLOYCode])}}">
                                     Modifier
 
-                                </a></td>
+                                </a>
+                            </td>
                             <td>
-                                <a href="#" class="btn btn-danger" type="button">
+                                <a href="#" class="btn btn-danger" type="button" onclick="if(confirm('Voulez-vous vraiment supprimer cet employé ?')){document.getElementById('{{$employe->EMPLOYCode}}'). submit()}">
                                     Supprimer
 
                                 </a>
-                                <form method="post">
+                                <form id="{{$employe->EMPLOYCode}}" action="{{route('employe.supprimer',['employe'=>$employe->EMPLOYCode])}}" method="post">
+                                    @csrf
                                     <input type="hidden" name="_method" value="delete">
                                 </form>
-
                             </td>
                         </tr>
                         @endforeach

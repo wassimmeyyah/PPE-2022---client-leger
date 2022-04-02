@@ -34,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white " href="{{route('lignecommande')}}">Détail des commandes</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -42,7 +42,7 @@
             <h3 class="card-header text-center font-weight-bold text-uppercase py-4 p-3 mb-2 bg-primary text-white">Les produits</h3>
         </div>
         <div class="d-flex justify-content-between">
-        {{ $produits->links()}}
+            {{ $produits->links()}}
             <p align="center">
                 <a class="btn btn-primary " type="button" href="{{route('produit.create')}}">
                     Ajouter un produit
@@ -53,41 +53,44 @@
 
 
 
-        <div class="card-body">
-            <div id="table" class="table-editable bg-light">
-                <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
-                <table class="table table-bordered table-responsive-md table-striped text-center">
-                    <thead>
-                        <tr>
-                            <th class="text-center"> Libellé du produit</th>
-                            <th class="text-center"> Prix unitaire du produit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($produits as $produit)
-                        <tr>
-                            <td class="pt-3-half"> {{$produit->PRODLibelle}} </td>
-                            <td class="pt-3-half"> {{$produit->PRODPrixUnitaire}} </td>
-                            <td><a class="btn btn-primary" type="button" href="">
+        <div id="table" class="table-editable bg-light">
+            <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+            @if(session()->has('successDelete'))
+            <div class="alert alert-success">
+                <h3>{{session()->get('successDelete')}}</h3>
+            </div>
+            @endif
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center"> Libellé du produit</th>
+                        <th class="text-center"> Prix unitaire du produit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($produits as $produit)
+                    <tr>
+                        <td class="pt-3-half"> {{$produit->PRODLibelle}} </td>
+                        <td class="pt-3-half"> {{$produit->PRODPrixUnitaire}} </td>
+                        <td><a class="btn btn-primary" type="button" href="{{route('produit.edit', ['produit'=>$produit->PRODRef])}}">
                                     Modifier
 
-                                </a></td>
-                            <td>
-                                <a href="#" class="btn btn-danger" type="button">
-                                    Supprimer
-
                                 </a>
-                                <form method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                </form>
+                        <td>
+                            <a href="#" class="btn btn-danger" type="button" onclick="if(confirm('Voulez-vous vraiment supprimer ce produit ?')){document.getElementById('{{$produit->PRODRef}}'). submit()}">
+                                Supprimer
 
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                            </a>
+                            <form id="{{$produit->PRODRef}}" action="{{route('produit.supprimer',['produit'=>$produit->PRODRef])}}" method="post">
+                                @csrf
+                                <input type="hidden" name="_method" value="delete">
+                            </form>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
     </div>
 </body>
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class LignecommandeController extends Controller
 {
     function index() {
-        $lignecommandes = Lignecommande::paginate(40);
+        $lignecommandes = Lignecommande::orderBy('PRODRef')->paginate(40);
         return view("lignecommande", compact('lignecommandes'));
     }
 
@@ -28,5 +28,12 @@ class LignecommandeController extends Controller
         Lignecommande::create($request->all());
 
         return back()->with("success", "Détail de la commande ajouté avec succès !");
+    }
+
+    public function delete(Lignecommande $lignecommande){
+        $lignecommande->delete();
+
+        return back()->with("successDelete", "Détail de la commande supprimé avec succès !");
+
     }
 }

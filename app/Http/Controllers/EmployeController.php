@@ -33,4 +33,42 @@ class EmployeController extends Controller
 
         return back()->with("success", "Employé ajouté avec succès !");
     }
+
+    public function delete(Employes $employe){
+        $employe->delete();
+
+        return back()->with("successDelete", "Employé supprimé avec succès !");
+
+    }
+
+    public function update(Request $request, Employes $employe)
+    {
+
+        $request->validate([
+            "EMPLOYCode"=>"required",
+            "EMPLOYNom"=>"required",
+            "EMPLOYPrenom"=>"required",
+            "EMPLOYPoste"=>"required",
+            "EMPLOYMail"=>"required",
+            "EMPLOYTelephone"=>"required",
+            "EMPLOYPharmacie"=>"required"
+        ]);
+
+        $employe->update([
+            "EMMPLOYCode" => $request->EMPLOYCode,
+            "EMPLOYNom" => $request->EMPLOYNom,
+            "EMPLOYPrenom" => $request->EMPLOYPrenom,
+            "EMPLOYPoste" => $request->EMPLOYPoste,
+            "EMPLOYMail" => $request->EMPLOYMail,
+            "EMPLOYTelephone" => $request->EMPLOYTelephone,
+            "EMPLOYPharmacie" => $request->EMPLOYPharmacie
+        ]);
+
+        return back()->with("successEdit", "Employé mis à jour avec succès !");
+    }
+
+    public function edit(Employes $employe) {
+        $employes = Employes::all();
+        return view('employeEdit', compact('employe'));
+    }
 }

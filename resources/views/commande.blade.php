@@ -34,7 +34,7 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white " href="{{route('lignecommande')}}">Détail des commandes</a>
                     </li>
-                    
+
                 </ul>
             </div>
         </nav>
@@ -56,6 +56,11 @@
         <div class="card-body">
             <div id="table" class="table-editable bg-light">
                 <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
+                @if(session()->has('successDelete'))
+                <div class="alert alert-success">
+                    <h3>{{session()->get('successDelete')}}</h3>
+                </div>
+                @endif
                 <table class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
@@ -67,23 +72,22 @@
                     <tbody>
                         @foreach($commandes as $commande)
                         <tr>
-                            <td class="pt-3-half"> {{$commande->COMRef}} </td>
+                            <td class="pt-3-half"> {{$commande->getKey()}} </td>
                             <td class="pt-3-half"> {{$commande->UTILCode}} </td>
                             <td class="pt-3-half"> {{$commande->COMDate}} </td>
-                            <td><a class="btn btn-primary" type="button" href="">
+                            <td><a class="btn btn-primary" type="button" href="{{route('commande.edit', ['commande'=>$commande->COMRef])}}">
                                     Modifier
 
-                                </a></td>
+                                </a>
                             <td>
-                                <a href="#" class="btn btn-danger" type="button">
+                                <a href="#" class="btn btn-danger" type="button" onclick="if(confirm('Voulez-vous vraiment supprimer cette commande ?')){document.getElementById('{{$commande->COMRef}}'). submit()}">
                                     Supprimer
 
                                 </a>
-                                <form method="post">
+                                <form id="{{$commande->COMRef}}" action="{{route('commande.supprimer',['commande'=>$commande->COMRef])}}" method="post">
+                                    @csrf
                                     <input type="hidden" name="_method" value="delete">
                                 </form>
-
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -29,4 +29,34 @@ class ProduitController extends Controller
 
         return back()->with("success", "Produit ajouté avec succès !");
     }
+
+    public function delete(Produit $produit){
+        $produit->delete();
+
+        return back()->with("successDelete", "Produit supprimé avec succès !");
+
+    }
+
+    public function update(Request $request, Produit $produit)
+    {
+
+        $request->validate([
+            "PRODRef"=>"required",
+            "PRODLibelle"=>"required",
+            "PRODPrixUnitaire"=>"required"
+        ]);
+
+        $produit->update([
+            "PRODRef" => $request->PRODRef,
+            "PRODLibelle" => $request->PRODLibelle,
+            "PRODPrixUnitaire" => $request->PRODPrixUnitaire
+        ]);
+
+        return back()->with("successEdit", "Produit mis à jour avec succès !");
+    }
+
+    public function edit(Produit $produit) {
+        $produits = Produit::all();
+        return view('produitEdit', compact('produit'));
+    }
 }

@@ -30,4 +30,11 @@ class UtilisateurController extends Controller
 
         return back()->with("success", "Utilisateur ajouté avec succès !");
     }
+
+    public function delete(Utilisateur $utilisateur){
+        $utilisateur->delete();
+
+        return back()->with("successDelete", "Utilisateur supprimé avec succès !");
+
+    }
 }
