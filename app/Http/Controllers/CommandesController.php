@@ -60,4 +60,16 @@ class CommandesController extends Controller
         $commandes = Commandes::all();
         return view('commandeEdit', compact('commande'));
     }
+
+    public function search()
+    {
+        $recherche = request()->input('recherche');
+
+        $commandes = Commandes::where('COMRef', 'LIKE', "%$recherche")
+            ->orWhere('COMDate', 'like', "%$recherche%")
+            ->orWhere('UTILCode', 'like', "%$recherche%")
+            ->paginate(10);
+
+        return view('commandeSearchResults')->with('commandes', $commandes);
+    }
 }

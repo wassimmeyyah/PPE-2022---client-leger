@@ -11,7 +11,7 @@ class PharmacieController extends Controller
     function index()
     {
         // $pharmacies = Pharmacies::orderBy('PHARMACode', 'asc')->paginate(2);
-        $pharmacies = Pharmacies::orderBy('PHARMACode', 'asc')->get();
+        $pharmacies = Pharmacies::orderBy('PHARMACode', 'asc')->paginate(5);
         return view("pharmacie", compact('pharmacies'));
     }
 
@@ -70,5 +70,19 @@ class PharmacieController extends Controller
     {
         $pharmacies = Pharmacies::all();
         return view('pharmacieEdit', compact('pharmacie'));
+    }
+
+    public function search()
+    {
+        $recherche = request()->input('recherche');
+
+        $pharmacies = Pharmacies::where('PHARMACode', 'LIKE', "%$recherche")
+            ->orWhere('PHARMAVille', 'like', "%$recherche%")
+            ->orWhere('PHARMAAdresse', 'like', "%$recherche%")
+            ->orWhere('PHARMANumeroTelephone', 'like', "%$recherche%")
+            ->orWhere('PHARMAMail', 'like', "%$recherche%")
+            ->paginate(10);
+
+        return view('pharmacieSearchResults')->with('pharmacies', $pharmacies);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommandesController;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\LigneCommandeController;
 use App\Http\Controllers\PharmacieController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\UtilisateurController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('accueil');
+    return view("auth/login");
+})->name('home');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 // PAGE DE CONSULTATION
 Route::get('/pharmacie', [PharmacieController::class, "index"])->name("pharmacie");
@@ -70,3 +75,11 @@ Route::get('/employe/{employe}', [EmployeController::class, "edit"])->name("empl
 Route::get('/utilisateur/{utilisateur}', [UtilisateurController::class, "edit"])->name("utilisateur.edit"); 
 Route::get('/produit/{produit}', [ProduitController::class, "edit"])->name("produit.edit"); 
 Route::get('/commande/{commande}', [CommandesController::class, "edit"])->name("commande.edit");
+
+// SEARCH
+
+Route::get('/pharmacieSearch', [PharmacieController::class, "search"])->name("pharmacie.search");
+Route::get('/employeSearch', [EmployeController::class, "search"])->name("employe.search");
+Route::get('/produitSearch', [ProduitController::class, "search"])->name("produit.search");
+Route::get('/commandeSearch', [CommandesController::class, "search"])->name("commande.search");
+Route::get('/lignecommandeSearch', [LigneCommandeController::class, "search"])->name("lignecommande.search");

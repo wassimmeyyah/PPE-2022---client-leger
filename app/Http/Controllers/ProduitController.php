@@ -7,22 +7,25 @@ use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
-    function index() {
-        $produits = Produit::paginate(10);
+    function index()
+    {
+        $produits = Produit::OrderBy('PRODLibelle')->paginate(10);
         return view("produit", compact('produits'));
     }
 
-    public function create() {
+    public function create()
+    {
         $produits = Produit::all();
         return view('produitCreate', compact('produits'));
     }
 
-    public function store(Request $request) {
-        
+    public function store(Request $request)
+    {
+
         $request->validate([
-            "PRODRef"=>"required",
-            "PRODLibelle"=>"required",
-            "PRODPrixUnitaire"=>"required"
+            "PRODRef" => "required",
+            "PRODLibelle" => "required",
+            "PRODPrixUnitaire" => "required"
         ]);
 
         Produit::create($request->all());
@@ -30,20 +33,20 @@ class ProduitController extends Controller
         return back()->with("success", "Produit ajouté avec succès !");
     }
 
-    public function delete(Produit $produit){
+    public function delete(Produit $produit)
+    {
         $produit->delete();
 
         return back()->with("successDelete", "Produit supprimé avec succès !");
-
     }
 
     public function update(Request $request, Produit $produit)
     {
 
         $request->validate([
-            "PRODRef"=>"required",
-            "PRODLibelle"=>"required",
-            "PRODPrixUnitaire"=>"required"
+            "PRODRef" => "required",
+            "PRODLibelle" => "required",
+            "PRODPrixUnitaire" => "required"
         ]);
 
         $produit->update([
@@ -55,8 +58,21 @@ class ProduitController extends Controller
         return back()->with("successEdit", "Produit mis à jour avec succès !");
     }
 
-    public function edit(Produit $produit) {
+    public function edit(Produit $produit)
+    {
         $produits = Produit::all();
         return view('produitEdit', compact('produit'));
+    }
+
+    public function search()
+    {
+        $recherche = request()->input('recherche');
+
+        $produits = Produit::where('PRODRef', 'LIKE', "%$recherche")
+            ->orWhere('PRODLibelle', 'like', "%$recherche%")
+            ->orWhere('PRODPrixUnitaire', 'like', "%$recherche%")
+            ->paginate(10);
+
+        return view('produitSearchResults')->with('produits', $produits);
     }
 }
